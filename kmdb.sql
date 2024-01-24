@@ -100,8 +100,6 @@
 -- The Dark Knight Rises  Anne Hathaway         Selina Kyle
 
 -- Turns column mode on but headers off
-.mode column
-.headers off
 
 -- Drop existing tables, so you'll start fresh each time this script is run.
 -- TODO!
@@ -124,6 +122,11 @@
 
 
 
+---------- DELIVERABLES ----------
+------------ SUE CHOI ------------
+
+
+
 --------------------------
 ---- Table for movies ----
 
@@ -137,24 +140,24 @@ CREATE TABLE movies (
 );
 
 INSERT INTO movies (
-    title, releaseyear, rating
+    title, releaseyear, rating, studio_id
 )
 VALUES (
-    "Batman Begins", 2005, "PG-13"
+    "Batman Begins", 2005, "PG-13", 1
 );
 
 INSERT INTO movies (
-    title, releaseyear, rating
+    title, releaseyear, rating, studio_id
 )
 VALUES (
-    "The Dark Knight", 2008, "PG-13"
+    "The Dark Knight", 2008, "PG-13", 1
 );
 
 INSERT INTO movies (
-    title, releaseyear, rating
+    title, releaseyear, rating, studio_id
 )
 VALUES (
-    "The Dark Knight Rises", 2012, "PG-13"
+    "The Dark Knight Rises", 2012, "PG-13", 1
 );
 
 
@@ -167,67 +170,105 @@ CREATE TABLE roles (
     id INTEGER PRIMARY KEY AUTOINCREMENT,
     role_name TEXT,
     movie_id INTEGER,
-    star_id INTEGER
+    star_id INTEGER,
+    FOREIGN KEY (movie_id) REFERENCES movies(id),
+    FOREIGN KEY (star_id) REFERENCES stars(id)
 );
+
+--- For Batman Begins
 INSERT INTO roles (
-    role_name
+    role_name, movie_id, star_id
 )
 VALUES (
-    "Bruce Wayne"
+    "Bruce Wayne", 1, 1
 );
 INSERT INTO roles (
-    role_name
+    role_name, movie_id, star_id
 )
 VALUES (
-    "Alfred"
+    "Alfred", 1, 2
 );
 INSERT INTO roles (
-    role_name
+    role_name, movie_id, star_id
 )
 VALUES (
-    "Ra's Al Ghul"
+    "Ra's Al Ghul", 1, 3
 );
 INSERT INTO roles (
-    role_name
+    role_name, movie_id, star_id
 )
 VALUES (
-    "Rachel Dawes"
+    "Rachel Dawes", 1, 4
 );
 INSERT INTO roles (
-    role_name
+    role_name, movie_id, star_id
 )
 VALUES (
-    "Commissioner Gordon"
+    "Commissioner Gordon", 1, 5
+);
+
+--- For The Dark Knight
+INSERT INTO roles (
+    role_name, movie_id, star_id
+)
+VALUES (
+    "Bruce Wayne", 2, 1
 );
 INSERT INTO roles (
-    role_name
+    role_name, movie_id, star_id
 )
 VALUES (
-    "Joke"
+    "Joker", 2, 6
 );
 INSERT INTO roles (
-    role_name
+    role_name, movie_id, star_id
 )
 VALUES (
-    "Harvey Dent"
+    "Harvey Dent", 2, 7
 );
 INSERT INTO roles (
-    role_name
+    role_name, movie_id, star_id
 )
 VALUES (
-    "Bane"
+    "Alfred", 2, 2
 );
 INSERT INTO roles (
-    role_name
+    role_name, movie_id, star_id
 )
 VALUES (
-    "John Blake"
+    "Rachel Dawes", 2, 8
+);
+
+--- For The Dark Knight Rises
+INSERT INTO roles (
+    role_name, movie_id, star_id
+)
+VALUES (
+    "Bruce Wayne", 3, 1
 );
 INSERT INTO roles (
-    role_name
+    role_name, movie_id, star_id
 )
 VALUES (
-    "Selina Kyle"
+    "Commissioner Gordon", 3, 5
+);
+INSERT INTO roles (
+    role_name, movie_id, star_id
+)
+VALUES (
+    "Bane", 3, 9
+);
+INSERT INTO roles (
+    role_name, movie_id, star_id
+)
+VALUES (
+    "John Blake", 3, 10
+);
+INSERT INTO roles (
+    role_name, movie_id, star_id
+)
+VALUES (
+    "Selina Kyle", 3, 11
 );
 
 
@@ -326,20 +367,20 @@ VALUES (
 
 
 ----------------------
----- Deliverables ----
+---- Final Deliverables ----
+
+.mode column
+.headers off
 
 .print "Movies"
 .print "======"
-SELECT * FROM movies;
+SELECT movies.title, movies.releaseyear, movies.rating, studios.studio_name FROM movies
+INNER JOIN studios ON studios.id = 1
+;
 
-.print "Roles"
+.print "Top Cast"
 .print "======"
-SELECT * FROM roles;
-
-.print "Stars"
-.print "======"
-SELECT * FROM stars;
-
-.print "Studios"
-.print "======"
-SELECT * FROM studios;
+SELECT movies.title, stars.star_name, roles.role_name FROM movies
+INNER JOIN roles ON movies.id = roles.movie_id
+INNER JOIN stars ON roles.star_id = stars.id
+;
