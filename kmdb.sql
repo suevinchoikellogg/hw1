@@ -366,21 +366,49 @@ VALUES (
 );
 
 
+
 ----------------------
 ---- Final Deliverables ----
 
 .mode column
 .headers off
 
+.print "========================================================"
 .print "Movies"
-.print "======"
+.print "========================================================"
 SELECT movies.title, movies.releaseyear, movies.rating, studios.studio_name FROM movies
 INNER JOIN studios ON studios.id = 1
 ;
 
+.print "========================================================"
+
+.print "========================================================"
 .print "Top Cast"
-.print "======"
+.print "========================================================"
 SELECT movies.title, stars.star_name, roles.role_name FROM movies
 INNER JOIN roles ON movies.id = roles.movie_id
 INNER JOIN stars ON roles.star_id = stars.id
+;
+
+.print "========================================================"
+
+.print "========================================================"
+.print "As a guest, I want to see the movies which a single actor, Christian Bale, has acted in"
+.print "========================================================"
+SELECT stars.star_name, movies.title, movies.releaseyear, roles.role_name
+FROM movies
+INNER JOIN roles ON movies.id = roles.movie_id
+INNER JOIN stars ON roles.star_id = stars.id
+WHERE stars.star_name = "Christian Bale"
+;
+
+.print "========================================================"
+
+.print "========================================================"
+.print "As a guest, I want to see the movies which a single studio has produced"
+.print "========================================================"
+SELECT studios.studio_name, movies.title, movies.releaseyear
+FROM movies
+INNER JOIN studios ON studios.id = 1
+WHERE studio_name = "Warner Bros."
 ;
