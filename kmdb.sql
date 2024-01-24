@@ -122,67 +122,224 @@
 -- TODO!
 
 
-DROP TABLE IF EXISTS movies;
-DROP TABLE IF EXISTS topcast;
 
+
+--------------------------
+---- Table for movies ----
+
+DROP TABLE IF EXISTS movies;
 CREATE TABLE movies (
     id INTEGER PRIMARY KEY AUTOINCREMENT,
     title TEXT,
     releaseyear INTEGER,
     rating TEXT,
-    studio TEXT
+    studio_id INTEGER
 );
 
-CREATE TABLE topcast (
+INSERT INTO movies (
+    title, releaseyear, rating
+)
+VALUES (
+    "Batman Begins", 2005, "PG-13"
+);
+
+INSERT INTO movies (
+    title, releaseyear, rating
+)
+VALUES (
+    "The Dark Knight", 2008, "PG-13"
+);
+
+INSERT INTO movies (
+    title, releaseyear, rating
+)
+VALUES (
+    "The Dark Knight Rises", 2012, "PG-13"
+);
+
+
+
+-------------------------
+---- Table for roles ----
+
+DROP TABLE IF EXISTS roles;
+CREATE TABLE roles (
     id INTEGER PRIMARY KEY AUTOINCREMENT,
-    movie_title TEXT,
-    starring TEXT,
-    role TEXT
+    role_name TEXT,
+    movie_id INTEGER,
+    star_id INTEGER
 );
-
-INSERT INTO movies (
-    title,
-    releaseyear,
-    rating,
-    studio
+INSERT INTO roles (
+    role_name
 )
 VALUES (
-    "Batman Begins",
-    2005,
-    "PG-13",
+    "Bruce Wayne"
+);
+INSERT INTO roles (
+    role_name
+)
+VALUES (
+    "Alfred"
+);
+INSERT INTO roles (
+    role_name
+)
+VALUES (
+    "Ra's Al Ghul"
+);
+INSERT INTO roles (
+    role_name
+)
+VALUES (
+    "Rachel Dawes"
+);
+INSERT INTO roles (
+    role_name
+)
+VALUES (
+    "Commissioner Gordon"
+);
+INSERT INTO roles (
+    role_name
+)
+VALUES (
+    "Joke"
+);
+INSERT INTO roles (
+    role_name
+)
+VALUES (
+    "Harvey Dent"
+);
+INSERT INTO roles (
+    role_name
+)
+VALUES (
+    "Bane"
+);
+INSERT INTO roles (
+    role_name
+)
+VALUES (
+    "John Blake"
+);
+INSERT INTO roles (
+    role_name
+)
+VALUES (
+    "Selina Kyle"
+);
+
+
+
+--------------------------
+---- Table for stars ----
+
+DROP TABLE IF EXISTS stars;
+CREATE TABLE stars (
+    id INTEGER PRIMARY KEY AUTOINCREMENT,
+    star_name TEXT
+);
+INSERT INTO stars (
+    star_name
+)
+VALUES (
+    "Christian Bale"
+);
+INSERT INTO stars (
+    star_name
+)
+VALUES (
+    "Michael Caine"
+);
+INSERT INTO stars (
+    star_name
+)
+VALUES (
+    "Liam Neeson"
+);
+INSERT INTO stars (
+    star_name
+)
+VALUES (
+    "Katie Holmes"
+);
+INSERT INTO stars (
+    star_name
+)
+VALUES (
+    "Gary Oldman"
+);
+INSERT INTO stars (
+    star_name
+)
+VALUES (
+    "Heath Ledger"
+);
+INSERT INTO stars (
+    star_name
+)
+VALUES (
+    "Aaron Eckhart"
+);
+INSERT INTO stars (
+    star_name
+)
+VALUES (
+    "Maggie Gyllenhaal"
+);
+INSERT INTO stars (
+    star_name
+)
+VALUES (
+    "Tom Hardy"
+);
+INSERT INTO stars (
+    star_name
+)
+VALUES (
+    "Joseph Gordon-Levitt"
+);
+INSERT INTO stars (
+    star_name
+)
+VALUES (
+    "Anne Hathaway"
+);
+
+
+
+--------------------------
+---- Table for studios ----
+
+DROP TABLE IF EXISTS studios;
+CREATE TABLE studios (
+    id INTEGER PRIMARY KEY AUTOINCREMENT,
+    studio_name TEXT
+);
+INSERT INTO studios (
+    studio_name
+)
+VALUES (
     "Warner Bros."
 );
 
-INSERT INTO movies (
-    title,
-    releaseyear,
-    rating,
-    studio
-)
-VALUES (
-    "The Dark Knight",
-    2008,
-    "PG-13",
-    "Warner Bros."
-);
 
-INSERT INTO movies (
-    title,
-    releaseyear,
-    rating,
-    studio
-)
-VALUES (
-    "The Dark Knight Rises",
-    2012,
-    "PG-13",
-    "Warner Bros."
-);
+----------------------
+---- Deliverables ----
 
 .print "Movies"
 .print "======"
 SELECT * FROM movies;
 
-.print "Top cast"
+.print "Roles"
 .print "======"
-SELECT * FROM topcast;
+SELECT * FROM roles;
+
+.print "Stars"
+.print "======"
+SELECT * FROM stars;
+
+.print "Studios"
+.print "======"
+SELECT * FROM studios;
